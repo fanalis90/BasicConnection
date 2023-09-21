@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Transactions;
 using BasicConnection;
+using System.ComponentModel.DataAnnotations;
 
 namespace BasicConnection;
 
@@ -22,6 +23,7 @@ public class Program
             Console.WriteLine("4. List regions with Where");
             Console.WriteLine("5. Join tables regions and countries and locations");
             Console.WriteLine("6. Data Employee");
+            Console.WriteLine("7. Department info");
             Console.WriteLine("10. Exit");
             Console.Write("Enter your choice: ");
             var input = Console.ReadLine();
@@ -99,23 +101,20 @@ public class Program
                 GeneralMenu.List(resultJoin2, "regions and countries");
                 break;
             case "6":
-                var Employee6 = new Employee();
-                var Department6 = new Department();
-                var Location6 = new Location();
-                var Country6 = new Country();
-                var Region6 = new Region();
-
-                var getEmployee6 = Employee6.GetAll();
-                var getDepartment6 = Department6.GetAll();
-                var getLocation6 = Location6.GetAll();
-                var getCountry6 = Country6.GetAll();
-                var getRegion6 = Region6.GetAll();
+                //menyimpan list dari return method getAll ke variabel tiap tabel
+                var getEmployee6 = new Employee().GetAll();
+                var getDepartment6 = new Department().GetAll();
+                var getLocation6 = new Location().GetAll();
+                var getCountry6 = new Country().GetAll();
+                var getRegion6 = new Region().GetAll();
                
+                //menyimpan list hasil join antar tabel ke variabel dataemployee
                 var dataEmployee = (from e in getEmployee6
                                     join d in getDepartment6 on e.DepartmentId equals d.Id
                                     join l in getLocation6 on d.LocationId equals l.Id
                                     join c in getCountry6 on  l.CountryId equals c.Id
                                     join r in getRegion6 on c.RegionId equals r.Id
+                                    //implementasi view model dataEmployeeVM
                                     select new DataEmployeeVM
                                     {
                                         Id = e.Id,
@@ -127,8 +126,30 @@ public class Program
                                         CountryName = c.Name,
                                         RegionName = r.Name
                                     }).ToList();
+                //menampilkan ke layar konsol menggunakan method list dari kelas generalmenu
                 GeneralMenu.List(dataEmployee, "Data Employee");
 
+                break;
+            case "7":
+                //menyimpan list dari return method getAll ke variabel tiap tabel
+                var getEmployee7 = new Employee().GetAll();
+                var getDepartment7 = new Department().GetAll();
+
+                //menyimpan list hasil join dan group by antar tabel ke variabel departmentInfo
+                var departmentInfo = (from e in getEmployee7
+                                      join d in getDepartment7 on e.DepartmentId equals d.Id
+                                      group e by new { d.Name, e.DepartmentId } into groupED
+                                      //implementasi View model 
+                                      select new DataByDepartmentVM
+                                      {
+                                          DepartmentName = groupED.Key.Name,
+                                          TotalEmployee = groupED.Count(),
+                                          //mencari min max salary menggunakan lambda expression 
+                                          MinSalary = groupED.Min(e => e.Salary),
+                                          MaxSalary = groupED.Max(e => e.Salary)
+                                      }).ToList();
+                //menampilkan ke layar konsol menggunakan method list dari kelas generalmenu
+                GeneralMenu.List(departmentInfo, "Department Info");
                 break;
             case "10":
                 return false;
