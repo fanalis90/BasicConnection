@@ -10,8 +10,6 @@ public class Region
     public int Id { get; set; }
     public string Name { get; set; }
 
-    private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
-
     public override string ToString()
     {
         return $"{Id} - {Name}";
@@ -26,7 +24,7 @@ public class Region
         var regions = new List<Region>();
 
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
 
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
@@ -83,7 +81,7 @@ public class Region
         //melakukan instansiasi kelas region
         var region = new Region();
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -149,7 +147,7 @@ public class Region
     public string Insert(string name)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -197,7 +195,7 @@ public class Region
     public string Update(int id, string name)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -246,7 +244,7 @@ public class Region
     public string Delete(int id)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command

@@ -11,8 +11,6 @@ public class Country
     public string Name { get; set; }
     public int RegionId { get; set; }
 
-    private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
-
     public override string ToString()
     {
         return $"{Id} - {Name} - {RegionId} ";
@@ -27,7 +25,7 @@ public class Country
         var Countries = new List<Country>();
 
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
 
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
@@ -85,7 +83,7 @@ public class Country
         //melakukan instansiasi kelas Country
         var Country = new Country();
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -153,7 +151,7 @@ public class Country
     public string Insert(string id, string name, int regionId )
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -203,7 +201,7 @@ public class Country
     public string Update(string id, string name, int regionId)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -253,7 +251,7 @@ public class Country
     public string Delete(string id)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command

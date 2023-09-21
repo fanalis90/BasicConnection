@@ -12,8 +12,6 @@ public class Job
     public int? MinSalary { get; set; }
     public int? MaxSalary { get; set; }
 
-    private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
-
 
     // GET ALL: Job
     //membuat Method get all dan mereturn list berupa kelas job
@@ -23,7 +21,7 @@ public class Job
         var jobs = new List<Job>();
 
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
 
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
@@ -82,7 +80,7 @@ public class Job
         //melakukan instansiasi kelas job
         var job = new Job();
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -151,7 +149,7 @@ public class Job
     public string Insert(string id, string title, int minSalary, int maxSalary)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -202,7 +200,7 @@ public class Job
     public string Update(string id, string title, int minSalary, int maxSalary)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -253,7 +251,7 @@ public class Job
     public string Delete(int id)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command

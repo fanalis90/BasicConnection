@@ -4,7 +4,7 @@ namespace BasicConnection;
 
 public class Provider
 {
-    private static readonly string connectionString = "Data Source=CAMOUFLY;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
+    private static readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
 
     public static SqlConnection GetConnection()
     {

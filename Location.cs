@@ -14,8 +14,6 @@ public class Location
     public string StateProvince { get; set; }
     public string CountryId { get; set; }
 
-    private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
-
     public override string ToString()
     {
         return $"{Id} - {StreetAddress} - {PostalCode} - {City} - {StateProvince} - {CountryId}";
@@ -30,8 +28,7 @@ public class Location
         var Locations = new List<Location>();
 
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
-
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
 
@@ -91,7 +88,7 @@ public class Location
         //melakukan instansiasi kelas Location
         var Location = new Location();
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -163,7 +160,7 @@ public class Location
     public string Insert(int id, string streetAdd, string postalCode, string city, string stateProvince, string countryId )
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -216,7 +213,7 @@ public class Location
     public string Update(int id, string streetAdd, string postalCode, string city, string stateProvince, string countryId)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -269,7 +266,7 @@ public class Location
     public string Delete(int id)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command

@@ -13,8 +13,6 @@ public class History
     public int DepartmentId { get; set; }
     public string jobId { get; set; }
 
-    private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
-
 
     // GET ALL: History
     //membuat Method get all dan mereturn list berupa kelas history
@@ -24,7 +22,7 @@ public class History
         var histories = new List<History>();
 
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
 
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
@@ -85,7 +83,7 @@ public class History
         //melakukan instansiasi kelas history
         var history = new History();
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -156,7 +154,7 @@ public class History
     public string Insert(DateTime startDate, int employeeId, DateTime? endDate, int departmentId, string jobId)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -208,7 +206,7 @@ public class History
     public string Update(int employeeId, DateTime? endDate)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -257,7 +255,7 @@ public class History
     public string Delete(int id)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command

@@ -12,8 +12,6 @@ public class Department
     public int LocationId { get; set; }
     public int ManagerId { get; set; }
 
-    private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
-
     public override string ToString()
     {
         return $"{Id} - {Name} - {LocationId} - {ManagerId} ";
@@ -28,7 +26,7 @@ public class Department
         var departments = new List<Department>();
 
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
 
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
@@ -88,7 +86,7 @@ public class Department
         var department = new Department();
        
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -158,7 +156,7 @@ public class Department
     public string Insert(int id, string name, int locationId, int? managerId)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -209,7 +207,7 @@ public class Department
     public string Update(int id, string name, int locationId, int managerId)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
@@ -261,7 +259,7 @@ public class Department
     public string Delete(int id)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
-        using var connection = new SqlConnection(connectionString);
+        using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
