@@ -5,7 +5,7 @@ using BasicConnection;
 
 namespace BasicConnection;
 
-public class Deparment
+public class Department
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -14,13 +14,18 @@ public class Deparment
 
     private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
 
-
-    // GET ALL: Deparment
-    //membuat Method get all dan mereturn list berupa kelas department
-    public List<Deparment> GetAll()
+    public override string ToString()
     {
-        // mendeklarasi variabel deparments dengan list dari kelas department
-        var deparments = new List<Deparment>();
+        return $"{Id} - {Name} - {LocationId} - {ManagerId} ";
+    }
+
+
+    // GET ALL: Department
+    //membuat Method get all dan mereturn list berupa kelas department
+    public List<Department> GetAll()
+    {
+        // mendeklarasi variabel departments dengan list dari kelas department
+        var departments = new List<Department>();
 
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
         using var connection = new SqlConnection(connectionString);
@@ -29,7 +34,7 @@ public class Deparment
         using var command = connection.CreateCommand();
 
         //menambahkan transact query ke command
-        command.CommandText = "SELECT * FROM deparments";
+        command.CommandText = "SELECT * FROM departments";
 
         try
         {
@@ -44,7 +49,7 @@ public class Deparment
                 while (reader.Read())
                 {
                     //membuat dan menambahkan class department dengan konstruktor ke dalam list department
-                    deparments.Add(new Deparment
+                    departments.Add(new Department
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
@@ -57,13 +62,13 @@ public class Deparment
                 connection.Close();
 
                 //mereturn list department yang memiliki isi
-                return deparments;
+                return departments;
             }
             //menutup akses ke data
             reader.Close();
             connection.Close();
             //mengembalikan list department kosong
-            return new List<Deparment>();
+            return new List<Department>();
         }
         //catch error apabila program diatas me throw error
         catch (Exception ex)
@@ -72,22 +77,22 @@ public class Deparment
             Console.WriteLine($"Error: {ex.Message}");
         }
         //mereturn list department kosong
-        return new List<Deparment>();
+        return new List<Department>();
     }
 
-    // GET BY ID: Deparment
+    // GET BY ID: Department
     //membuat Method get by id dan mereturn list berupa kelas department
-    public Deparment GetById(int id)
+    public Department GetById(int id)
     {
         //melakukan instansiasi kelas department
-        var department = new Deparment();
+        var department = new Department();
        
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
         using var connection = new SqlConnection(connectionString);
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
-        command.CommandText = "SELECT * FROM deparments WHERE id = @id";
+        command.CommandText = "SELECT * FROM departments WHERE id = @id";
 
         try
         {
@@ -148,7 +153,7 @@ public class Deparment
         return department;
     }
 
-    // INSERT: Deparment
+    // INSERT: Department
     //membuat Method Insert dan mereturn string
     public string Insert(int id, string name, int locationId, int? managerId)
     {
@@ -199,7 +204,7 @@ public class Deparment
         }
     }
 
-    // UPDATE: Deparment
+    // UPDATE: Department
     //membuat Method Update dan mereturn string
     public string Update(int id, string name, int locationId, int managerId)
     {
@@ -251,7 +256,7 @@ public class Deparment
         }
     }
 
-    // DELETE: Deparment
+    // DELETE: Department
     //membuat Method Insert dan mereturn string
     public string Delete(int id)
     {
@@ -260,7 +265,7 @@ public class Deparment
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
-        command.CommandText = "DELETE FROM deparments WHERE id = @id;";
+        command.CommandText = "DELETE FROM departments WHERE id = @id;";
 
         try
         {

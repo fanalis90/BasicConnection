@@ -16,6 +16,11 @@ public class Location
 
     private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
 
+    public override string ToString()
+    {
+        return $"{Id} - {StreetAddress} - {PostalCode} - {City} - {StateProvince} - {CountryId}";
+    }
+
 
     // GET ALL: Location
     //membuat Method get all dan mereturn list berupa kelas Location

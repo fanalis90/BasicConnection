@@ -12,7 +12,12 @@ public class Region
 
     private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
 
-  
+    public override string ToString()
+    {
+        return $"{Id} - {Name}";
+    }
+
+
     // GET ALL: Region
     //membuat Method get all dan mereturn list berupa kelas region
     public List<Region> GetAll()

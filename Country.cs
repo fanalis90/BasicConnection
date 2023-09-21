@@ -13,6 +13,11 @@ public class Country
 
     private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
 
+    public override string ToString()
+    {
+        return $"{Id} - {Name} - {RegionId} ";
+    }
+
 
     // GET ALL: Country
     //membuat Method get all dan mereturn list berupa kelas Country

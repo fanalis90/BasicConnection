@@ -21,6 +21,11 @@ public class Employee
 
     private readonly string connectionString = "Data Source=DESKTOP-CI3320S;Integrated Security=True;Database=db_hr_dts;Connect Timeout=30;";
 
+    public override string ToString()
+    {
+        return $"{Id} - {HireDate} - {FirstName} - {LastName} - {Email} - {PhoneNumber}";
+    }
+
 
     // GET ALL: Employee
     //membuat Method get all dan mereturn list berupa kelas employee
