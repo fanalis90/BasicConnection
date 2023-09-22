@@ -27,6 +27,8 @@ namespace BasicConnection.Views
             var streedAddress = Console.ReadLine();
             Console.WriteLine("Insert Postal Code");
             var postalCode = Console.ReadLine();
+            Console.WriteLine("Insert State Province");
+            var stateProvince = Console.ReadLine();
             Console.WriteLine("Insert City");
             var city = Console.ReadLine();
             Console.WriteLine("Insert Country Id");
@@ -36,6 +38,7 @@ namespace BasicConnection.Views
                 Id = locationId,
                 StreetAddress = streedAddress,
                 PostalCode = postalCode,
+                StateProvince = stateProvince,
                 City = city,
                 CountryId = countryId
             };
@@ -56,10 +59,12 @@ namespace BasicConnection.Views
                     Console.WriteLine("masukan hanya angka");
                 }
             }
-            Console.WriteLine("Insert Streed Addresse");
+            Console.WriteLine("Insert Streed Address");
             var streedAddress = Console.ReadLine();
             Console.WriteLine("Insert Postal Code");
             var postalCode = Console.ReadLine();
+            Console.WriteLine("Insert State Province");
+            var stateProvince = Console.ReadLine();
             Console.WriteLine("Insert City");
             var city = Console.ReadLine();
             Console.WriteLine("Insert Country Id");
@@ -70,6 +75,7 @@ namespace BasicConnection.Views
                 Id = locationId,
                 StreetAddress = streedAddress,
                 PostalCode = postalCode,
+                StateProvince = stateProvince,
                 City = city,
                 CountryId = countryId
             };
