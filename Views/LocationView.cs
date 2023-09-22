@@ -23,7 +23,7 @@ namespace BasicConnection.Views
                     Console.WriteLine("masukan hanya angka");
                 }
             }
-            Console.WriteLine("Insert Streed Addresse");
+            Console.WriteLine("Insert Streed Address");
             var streedAddress = Console.ReadLine();
             Console.WriteLine("Insert Postal Code");
             var postalCode = Console.ReadLine();

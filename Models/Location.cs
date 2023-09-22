@@ -157,14 +157,14 @@ public class Location
 
     // INSERT: Location
     //membuat Method Insert dan mereturn string
-    public string Insert(Location location )
+    public string Insert(Location location)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
         using var connection = Provider.GetConnection();
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
-        command.CommandText = "INSERT INTO locations (id, street_address, postal_code, city, state_province, country_id) VALUES (@id, @streedAdd, @postalCode, @city, @stateProvince, @countryId);";
+        command.CommandText = "INSERT INTO locations (id, street_address, postal_code, city, state_province, country_id) VALUES (@id, @streetAdd, @postalCode, @city, @stateProvince, @countryId);";
 
         try
         {
@@ -213,7 +213,7 @@ public class Location
         // membuat command dengan method createcommand dari connection
         using var command = connection.CreateCommand();
         //menambahkan transact query ke command
-        command.CommandText = "UPDATE locations SET street_address = @streedAdd, postal_code = @postalCode, city = @city, state_province = @stateProvince,  country_id = @countryId WHERE id = @id;";
+        command.CommandText = "UPDATE locations SET street_address = @streetAdd, postal_code = @postalCode, city = @city, state_province = @stateProvince,  country_id = @countryId WHERE id = @id;";
 
         try
         {
