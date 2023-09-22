@@ -148,7 +148,7 @@ public class Country
 
     // INSERT: Country
     //membuat Method Insert dan mereturn string
-    public string Insert(string id, string name, int regionId )
+    public string Insert(Country country )
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
         using var connection = Provider.GetConnection();
@@ -160,9 +160,9 @@ public class Country
         try
         {
             //menambah parameter untuk command
-            command.Parameters.Add(new SqlParameter("@id", id));
-            command.Parameters.Add(new SqlParameter("@name", name));
-            command.Parameters.Add(new SqlParameter("@regionId", regionId));
+            command.Parameters.Add(new SqlParameter("@id", country.Id));
+            command.Parameters.Add(new SqlParameter("@name", country.Name));
+            command.Parameters.Add(new SqlParameter("@regionId", country.RegionId));
             //mencoba koneksi ke database
             connection.Open();
             using var transaction = connection.BeginTransaction();
@@ -174,12 +174,8 @@ public class Country
                 //melakukan commit untuk semua transaksi
                 transaction.Commit();
                 connection.Close();
-                //mereturn nilai dengan menggunakan if condition
-                if (result > 0)
-                {
-                    return "Insert Success";
-                }
-                return "Insert Failed";
+                //mereturn nilai result dengan method tostring agar menjadi string
+                return result.ToString();
             }
             catch (Exception ex)
             {
@@ -198,7 +194,7 @@ public class Country
 
     // UPDATE: Country
     //membuat Method Update dan mereturn string
-    public string Update(string id, string name, int regionId)
+    public string Update(Country country)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
         using var connection = Provider.GetConnection();
@@ -210,9 +206,9 @@ public class Country
         try
         {
             //menambah parameter untuk command
-            command.Parameters.Add(new SqlParameter("@name", name));
-            command.Parameters.Add(new SqlParameter("@id", id));
-            command.Parameters.Add(new SqlParameter("@regionId", regionId));
+            command.Parameters.Add(new SqlParameter("@name", country.Name));
+            command.Parameters.Add(new SqlParameter("@id", country.Id));
+            command.Parameters.Add(new SqlParameter("@regionId", country.RegionId));
             //mencoba koneksi ke database
             connection.Open();
             using var transaction = connection.BeginTransaction();
@@ -224,12 +220,8 @@ public class Country
                 //melakukan commit untuk semua transaksi
                 transaction.Commit();
                 connection.Close();
-                //mereturn nilai dengan menggunakan if condition
-                if (result > 0)
-                {
-                    return "Update Success";
-                }
-                return "Update Failed";
+                //mereturn nilai result dengan method tostring agar menjadi string
+                return result.ToString();
             }
             catch (Exception ex)
             {
@@ -273,12 +265,8 @@ public class Country
                 transaction.Commit();
                 connection.Close();
 
-                //mereturn nilai dengan menggunakan if condition
-                if (result > 0)
-                {
-                    return "Delete Success";
-                }
-                return "Delete Failed";
+                //mereturn nilai result dengan method tostring agar menjadi string
+                return result.ToString();
             }
             catch (Exception ex)
             {

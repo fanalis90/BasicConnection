@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicConnection
+namespace BasicConnection.ViewModels
 {
     public class DataByDepartmentVM
     {
@@ -12,7 +12,6 @@ namespace BasicConnection
         public int TotalEmployee { get; set; }
         public int MinSalary { get; set; }
         public int MaxSalary { get; set; }
-
         public override string ToString()
         {
             return $"{DepartmentName} - {TotalEmployee} - {MinSalary} - {MaxSalary} - ";

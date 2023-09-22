@@ -168,12 +168,8 @@ public class Region
                 //melakukan commit untuk semua transaksi
                 transaction.Commit();
                 connection.Close();
-                //mereturn nilai dengan menggunakan if condition
-                if (result > 0)
-                {
-                    return "Insert Success";
-                }
-                return "Insert Failed";
+                //mereturn nilai result dengan method tostring agar menjadi string
+                return result.ToString();
             }
             catch (Exception ex)
             {
@@ -192,7 +188,7 @@ public class Region
 
     // UPDATE: Region
     //membuat Method Update dan mereturn string
-    public string Update(int id, string name)
+    public string Update(Region region)
     {
         //koneksi ke database menggunakan library sqlconnection dengan argument connectionstring
         using var connection = Provider.GetConnection();
@@ -204,8 +200,8 @@ public class Region
         try
         {
             //menambah parameter untuk command
-            command.Parameters.Add(new SqlParameter("@name", name));
-            command.Parameters.Add(new SqlParameter("@id", id));
+            command.Parameters.Add(new SqlParameter("@name", region.Name));
+            command.Parameters.Add(new SqlParameter("@id", region.Id));
             //mencoba koneksi ke database
             connection.Open();
             using var transaction = connection.BeginTransaction();
@@ -217,12 +213,8 @@ public class Region
                 //melakukan commit untuk semua transaksi
                 transaction.Commit();
                 connection.Close();
-                //mereturn nilai dengan menggunakan if condition
-                if (result > 0)
-                {
-                    return "Update Success";
-                }
-                return "Update Failed";
+                //mereturn nilai result dengan method tostring agar menjadi string
+                return result.ToString();
             }
             catch (Exception ex)
             {
@@ -266,12 +258,8 @@ public class Region
                 transaction.Commit();
                 connection.Close();
 
-                //mereturn nilai dengan menggunakan if condition
-                if (result > 0)
-                {
-                    return "Delete Success";
-                }
-                return "Delete Failed";
+                //mereturn nilai result dengan method tostring agar menjadi string
+                return result.ToString();
             }
             catch (Exception ex)
             {

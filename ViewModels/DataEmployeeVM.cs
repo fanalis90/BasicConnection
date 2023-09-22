@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicConnection
+namespace BasicConnection.ViewModels
 {
     public class DataEmployeeVM
     {
@@ -24,5 +24,5 @@ namespace BasicConnection
         }
     }
 
-    
+
 }

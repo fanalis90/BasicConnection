@@ -1,4 +1,4 @@
-﻿namespace BasicConnection;
+﻿namespace BasicConnection.ViewModels;
 
 public class RegionAndCountryVM
 {

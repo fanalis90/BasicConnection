@@ -2,8 +2,10 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Transactions;
-using BasicConnection;
 using System.ComponentModel.DataAnnotations;
+using BasicConnection.Views;
+using BasicConnection.ViewModels;
+using BasicConnection.Controllers;
 
 namespace BasicConnection;
 
@@ -17,9 +19,9 @@ public class Program
         var choice = true;
         while (choice)
         {
-            Console.WriteLine("1. List all regions");
-            Console.WriteLine("2. List all countries");
-            Console.WriteLine("3. List all locations");
+            Console.WriteLine("1. CRUD Region");
+            Console.WriteLine("2. CRUD countries");
+            Console.WriteLine("3. CRUD locations");
             Console.WriteLine("4. List regions with Where");
             Console.WriteLine("5. Join tables regions and countries and locations");
             Console.WriteLine("6. Data Employee");
@@ -27,34 +29,28 @@ public class Program
             Console.WriteLine("10. Exit");
             Console.Write("Enter your choice: ");
             var input = Console.ReadLine();
-            choice = Menu(input);
+            choice = MyMenu(input);
         }
     }
 
-    public static bool Menu(string input)
+    public static bool MyMenu(string input)
     {
         switch (input)
         {
             case "1":
-                var region = new Region();
-                var regions = region.GetAll();
-                GeneralMenu.List(regions, "regions");
+                Menu.Region();
                 break;
             case "2":
-                var country = new Country();
-                var countries = country.GetAll();
-                GeneralMenu.List(countries, "countries");
+                Menu.Country();
                 break;
             case "3":
-                var location = new Location();
-                var locations = location.GetAll();
-                GeneralMenu.List(locations, "locations");
+                Menu.Location();
                 break;
             case "4":
                 var region2 = new Region();
                 string input2 = Console.ReadLine();
                 var result = region2.GetAll().Where(r => r.Name.Contains(input2)).ToList();
-                GeneralMenu.List(result, "regions");
+                //GeneralView.List(result, "regions");
                 break;
             case "5":
                 var country3 = new Country();
@@ -98,7 +94,7 @@ public class Program
                     Console.WriteLine($"{item.Id} - {item.NameRegion} - {item.NameCountry} - {item.RegionId}");
                 }*/
 
-                GeneralMenu.List(resultJoin2, "regions and countries");
+                //GeneralView.List(resultJoin2, "regions and countries");
                 break;
             case "6":
                 //menyimpan list dari return method getAll ke variabel tiap tabel
@@ -127,7 +123,7 @@ public class Program
                                         RegionName = r.Name
                                     }).ToList();
                 //menampilkan ke layar konsol menggunakan method list dari kelas generalmenu
-                GeneralMenu.List(dataEmployee, "Data Employee");
+                //GeneralView.List(dataEmployee, "Data Employee");
 
                 break;
             case "7":
@@ -149,7 +145,7 @@ public class Program
                                           MaxSalary = groupED.Max(e => e.Salary)
                                       }).ToList();
                 //menampilkan ke layar konsol menggunakan method list dari kelas generalmenu
-                GeneralMenu.List(departmentInfo, "Department Info");
+                //GeneralView.List(departmentInfo, "Department Info");
                 break;
             case "10":
                 return false;
@@ -160,6 +156,8 @@ public class Program
 
         return true;
     }
+
+   
 
 
 }
